@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quantum Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="particles" id="particles"></div>
+
+    <div class="calculator-container">
+      <div class="title">QUANTUM CALC</div>
+
+      <div class="mode-selector">
+        <div class="mode-track">
+          <div class="mode-slider" id="modeSlider"></div>
+          <button class="mode-btn active" onclick="selectMode(1)">BASIC</button>
+          <button class="mode-btn" onclick="selectMode(2)">ADVANCED</button>
+          <button class="mode-btn" onclick="selectMode(3)">QUANTUM</button>
+        </div>
+      </div>
+
+      <div class="display-container">
+        <div class="display-text" id="display">0</div>
+      </div>
+
+      <div class="button-grid simple-grid" id="simple-calc">
+        <button class="calc-btn clear-btn" onclick="clearAll()">AC</button>
+        <button class="calc-btn clear-btn" onclick="clearEntry()">CE</button>
+        <button
+          class="calc-btn operator-btn"
+          onclick="appendValue('/')"
+          data-key="/"
+        >
+          ÷
+        </button>
+        <button
+          class="calc-btn operator-btn"
+          onclick="appendValue('*')"
+          data-key="*"
+        >
+          ×
+        </button>
+
+        <button class="calc-btn" onclick="appendValue('7')" data-key="7">
+          7
+        </button>
+        <button class="calc-btn" onclick="appendValue('8')" data-key="8">
+          8
+        </button>
+        <button class="calc-btn" onclick="appendValue('9')" data-key="9">
+          9
+        </button>
+        <button
+          class="calc-btn operator-btn"
+          onclick="appendValue('-')"
+          data-key="-"
+        >
+          -
+        </button>
+
+        <button class="calc-btn" onclick="appendValue('4')" data-key="4">
+          4
+        </button>
+        <button class="calc-btn" onclick="appendValue('5')" data-key="5">
+          5
+        </button>
+        <button class="calc-btn" onclick="appendValue('6')" data-key="6">
+          6
+        </button>
+        <button
+          class="calc-btn operator-btn"
+          onclick="appendValue('+')"
+          data-key="+"
+        >
+          +
+        </button>
+
+        <button class="calc-btn" onclick="appendValue('1')" data-key="1">
+          1
+        </button>
+        <button class="calc-btn" onclick="appendValue('2')" data-key="2">
+          2
+        </button>
+        <button class="calc-btn" onclick="appendValue('3')" data-key="3">
+          3
+        </button>
+        <button
+          class="calc-btn equals-btn"
+          onclick="calculate()"
+          data-key="="
+          rowspan="2"
+        >
+          =
+        </button>
+
+        <button
+          class="calc-btn zero-btn"
+          onclick="appendValue('0')"
+          data-key="0"
+        >
+          0
+        </button>
+        <button class="calc-btn" onclick="appendValue('.')" data-key=".">
+          .
+        </button>
+      </div>
+
+      <div class="button-grid advanced-grid hidden" id="advanced-calc">
+        <button class="calc-btn clear-btn" onclick="clearAll()">AC</button>
+        <button class="calc-btn clear-btn" onclick="clearEntry()">CE</button>
+        <button
+          class="calc-btn operator-btn"
+          onclick="appendValue('/')"
+          data-key="/"
+        >
+          ÷
+        </button>
+        <button
+          class="calc-btn operator-btn"
+          onclick="appendValue('*')"
+          data-key="*"
+        >
+          ×
+        </button>
+        <button
+          class="calc-btn function-btn"
+          onclick="calculateFunction('sqrt')"
+        >
+          √
+        </button>
+
+        <button class="calc-btn" onclick="appendValue('7')" data-key="7">
+          7
+        </button>
+        <button class="calc-btn" onclick="appendValue('8')" data-key="8">
+          8
+        </button>
+        <button class="calc-btn" onclick="appendValue('9')" data-key="9">
+          9
+        </button>
+        <button
+          class="calc-btn operator-btn"
+          onclick="appendValue('-')"
+          data-key="-"
+        >
+          -
+        </button>
+        <button
+          class="calc-btn function-btn"
+          onclick="calculateFunction('power')"
+          data-key="^"
+        >
+          x²
+        </button>
+
+        <button class="calc-btn" onclick="appendValue('4')" data-key="4">
+          4
+        </button>
+        <button class="calc-btn" onclick="appendValue('5')" data-key="5">
+          5
+        </button>
+        <button class="calc-btn" onclick="appendValue('6')" data-key="6">
+          6
+        </button>
+        <button
+          class="calc-btn operator-btn"
+          onclick="appendValue('+')"
+          data-key="+"
+        >
+          +
+        </button>
+        <button
+          class="calc-btn function-btn"
+          onclick="calculateFunction('percent')"
+        >
+          %
+        </button>
+
+        <button class="calc-btn" onclick="appendValue('1')" data-key="1">
+          1
+        </button>
+        <button class="calc-btn" onclick="appendValue('2')" data-key="2">
+          2
+        </button>
+        <button class="calc-btn" onclick="appendValue('3')" data-key="3">
+          3
+        </button>
+        <button
+          class="calc-btn equals-btn"
+          onclick="calculate()"
+          data-key="="
+          rowspan="2"
+        >
+          =
+        </button>
+        <button
+          class="calc-btn operator-btn"
+          onclick="appendValue('(')"
+          data-key="("
+        >
+          (
+        </button>
+
+        <button
+          class="calc-btn zero-btn"
+          onclick="appendValue('0')"
+          data-key="0"
+        >
+          0
+        </button>
+        <button class="calc-btn" onclick="appendValue('.')" data-key=".">
+          .
+        </button>
+        <button
+          class="calc-btn operator-btn"
+          onclick="appendValue(')')"
+          data-key=")"
+        >
+          )
+        </button>
+      </div>
+
+      <div class="button-grid scientific-grid hidden" id="scientific-calc">
+        <button class="calc-btn clear-btn" onclick="clearAll()">AC</button>
+        <button class="calc-btn clear-btn" onclick="clearEntry()">CE</button>
+        <button
+          class="calc-btn operator-btn"
+          onclick="appendValue('/')"
+          data-key="/"
+        >
+          ÷
+        </button>
+        <button
+          class="calc-btn operator-btn"
+          onclick="appendValue('*')"
+          data-key="*"
+        >
+          ×
+        </button>
+        <button
+          class="calc-btn function-btn"
+          onclick="calculateFunction('sqrt')"
+        >
+          √
+        </button>
+        <button class="calc-btn function-btn" onclick="appendValue('3.14159')">
+          π
+        </button>
+
+        <button
+          class="calc-btn function-btn"
+          onclick="calculateFunction('sin')"
+        >
+          sin
+        </button>
+        <button
+          class="calc-btn function-btn"
+          onclick="calculateFunction('cos')"
+        >
+          cos
+        </button>
+        <button
+          class="calc-btn function-btn"
+          onclick="calculateFunction('tan')"
+        >
+          tan
+        </button>
+        <button
+          class="calc-btn function-btn"
+          onclick="calculateFunction('log')"
+        >
+          log
+        </button>
+        <button class="calc-btn function-btn" onclick="calculateFunction('ln')">
+          ln
+        </button>
+        <button class="calc-btn function-btn" onclick="appendValue('2.71828')">
+          e
+        </button>
+
+        <button class="calc-btn" onclick="appendValue('7')" data-key="7">
+          7
+        </button>
+        <button class="calc-btn" onclick="appendValue('8')" data-key="8">
+          8
+        </button>
+        <button class="calc-btn" onclick="appendValue('9')" data-key="9">
+          9
+        </button>
+        <button
+          class="calc-btn operator-btn"
+          onclick="appendValue('-')"
+          data-key="-"
+        >
+          -
+        </button>
+        <button
+          class="calc-btn function-btn"
+          onclick="calculateFunction('power')"
+          data-key="^"
+        >
+          x²
+        </button>
+        <button
+          class="calc-btn function-btn"
+          onclick="calculateFunction('exp')"
+        >
+          e^x
+        </button>
+
+        <button class="calc-btn" onclick="appendValue('4')" data-key="4">
+          4
+        </button>
+        <button class="calc-btn" onclick="appendValue('5')" data-key="5">
+          5
+        </button>
+        <button class="calc-btn" onclick="appendValue('6')" data-key="6">
+          6
+        </button>
+        <button
+          class="calc-btn operator-btn"
+          onclick="appendValue('+')"
+          data-key="+"
+        >
+          +
+        </button>
+        <button
+          class="calc-btn function-btn"
+          onclick="calculateFunction('percent')"
+        >
+          %
+        </button>
+        <button
+          class="calc-btn function-btn"
+          onclick="calculateFunction('factorial')"
+        >
+          n!
+        </button>
+
+        <button class="calc-btn" onclick="appendValue('1')" data-key="1">
+          1
+        </button>
+        <button class="calc-btn" onclick="appendValue('2')" data-key="2">
+          2
+        </button>
+        <button class="calc-btn" onclick="appendValue('3')" data-key="3">
+          3
+        </button>
+        <button
+          class="calc-btn equals-btn"
+          onclick="calculate()"
+          data-key="="
+          rowspan="2"
+        >
+          =
+        </button>
+        <button
+          class="calc-btn operator-btn"
+          onclick="appendValue('(')"
+          data-key="("
+        >
+          (
+        </button>
+        <button
+          class="calc-btn operator-btn"
+          onclick="appendValue(')')"
+          data-key=")"
+        >
+          )
+        </button>
+
+        <button
+          class="calc-btn zero-btn"
+          onclick="appendValue('0')"
+          data-key="0"
+        >
+          0
+        </button>
+        <button class="calc-btn" onclick="appendValue('.')" data-key=".">
+          .
+        </button>
+        <button
+          class="calc-btn function-btn"
+          onclick="calculateFunction('power')"
+        >
+          x^y
+        </button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
